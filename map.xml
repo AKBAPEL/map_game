@@ -409,7 +409,7 @@
  <node id="8112056106" visible="true" version="1" changeset="94005358" timestamp="2020-11-12T15:34:35Z" user="Алексей1983" uid="3366581" lat="56.8555158" lon="53.2839391"/>
  <node id="8393947164" visible="true" version="1" changeset="98707822" timestamp="2021-02-04T13:15:55Z" user="FastProger" uid="309427" lat="56.8551610" lon="53.2835608"/>
  <node id="8393947165" visible="true" version="1" changeset="98707822" timestamp="2021-02-04T13:15:55Z" user="FastProger" uid="309427" lat="56.8553285" lon="53.2835039"/>
- <way id="23443580" visible="true" version="37" changeset="98707822" timestamp="2021-02-04T13:15:55Z" user="FastProger" uid="309427">
+ <way id="1143992243" visible="true" version="37" changeset="98707822" timestamp="2021-02-04T13:15:55Z" user="FastProger" uid="309427">
   <nd ref="253887462"/>
   <nd ref="1333407145"/>
   <nd ref="415872167"/>
