@@ -25,8 +25,8 @@ def _parse_way(way):
     nid = attrs['id']
     for child in way:
         tagname = child.tag
+        attrs = child.attrib
         if tagname == 'nd':
-            attrs = child.attrib
             nds.append(attrs['ref'])
         elif tagname == 'tag':
             print(attrs)
@@ -71,4 +71,4 @@ def parser(root) -> dict:
 
 
 if __name__ == "__main__":
-    filename = 'map.xml'
+    load()
