@@ -29,7 +29,6 @@ def _parse_way(way):
         if tagname == 'nd':
             nds.append(attrs['ref'])
         elif tagname == 'tag':
-            print(attrs)
             tags.append(Tag(attrs["k"], attrs['v']))
     return Way(nid, nds, tags)
 
