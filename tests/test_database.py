@@ -11,8 +11,8 @@ def test_database_pack():
     db = map_game.database.Database()
     packed = db._pack(parsed)
 
-    assert 'Nodes' in packed
-    assert 'Way' in packed
-    assert 'House' in packed
-    assert 'Area' in packed
+    assert 'Points' in packed
+    assert 'Roads' in packed
+    assert 'Houses' in packed
+    assert 'Areas' in packed
 
