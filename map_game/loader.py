@@ -47,7 +47,6 @@ def _load(filename: str):
 @click.argument('filename')
 def load(filename: str):
     try:
-        load(filename)
         db = map_game.database.create()
         root = _load(filename)
         db.save(parser(root))

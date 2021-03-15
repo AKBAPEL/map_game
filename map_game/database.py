@@ -1,9 +1,9 @@
 from collections import namedtuple
 import pytest
-
+import pickle
 Point = namedtuple('Point', 'x y')
-
-
+Road = namedtuple('Road', 'idx width color')
+Area = namedtuple('Area', 'points color can_cross')
 
 class Database:
     def __init__(self):
@@ -17,6 +17,9 @@ class Database:
 
     def save(self,data: dict):
         packed_data = self._pack(data)
+
+        with open('data.pickle', 'wb') as f:
+            pickle.dump(packed_data, f)
 
     def load(self):
         ...
@@ -59,11 +62,25 @@ class Database:
 
     def _make_area(self,way):
         "Создать обект здания или площади на местности"
-        ...
+        idx = int(way.id)
+        points = [int(i) for i in way.nds]
+        for tag in way.tags:
+            if tag.k == 'building':
+                key = 'Houses'
+                color = (0,255,0)
+                can_cross = False
+            else: key = 'Areas'
+            color = (0, 0, 255)
+            can_cross = True
+        self.db[key][idx] = Area(points, color, can_cross)
 
     def _make_road(self,way):
         "Создать дорогу"
-        ...
+        idx = int(way.id)
+        width = 3
+        color = (255, 0, 0)
+        points = [int(i) for i in way.nds]
+        self.db['Roads'][idx] = Road(points, width, color)
 
 
 
