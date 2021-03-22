@@ -2,10 +2,10 @@ from collections import namedtuple
 import pytest
 import pickle
 Point = namedtuple('Point', 'x y')
-Road = namedtuple('Road', 'idx width color')
+Road = namedtuple('Road', 'points width color')
 Area = namedtuple('Area', 'points color can_cross')
 
-class Database:
+class DataBase:
     def __init__(self):
         self.FILENAME = 'map_base.data'
         self.db = {
@@ -87,4 +87,4 @@ class Database:
 
 
 def create():
-    return Database()
+    return DataBase()
