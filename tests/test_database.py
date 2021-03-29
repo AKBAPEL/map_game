@@ -8,7 +8,7 @@ def test_parser():
     FILENAME = 'map.xml'
     result = map_game.loader._load(FILENAME)
     parsed = map_game.loader.parser(result)
-    db = map_game.database.Database()
+    db = map_game.database.DataBase()
     packed = db._pack(parsed)
 
     assert packed['Points']
