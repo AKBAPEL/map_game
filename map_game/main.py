@@ -45,8 +45,8 @@ def init_sprites():
     houses = data['Houses']
     areas = data['Areas']
     roads = data['Roads']
-    house_sprites = pygame.sprite.Group()
     area_sprites = pygame.sprite.Group()
+    house_sprites = pygame.sprite.Group()
     road_sprites = pygame.sprite.Group()
     for house in houses:
         p = (Polygon(houses[house], points))
@@ -55,11 +55,11 @@ def init_sprites():
     for area in areas:
         p = (Polygon(areas[area], points))
         p.fill_surface()
-        house_sprites.add(p)
+        area_sprites.add(p)
     for road in roads:
         r = (Road(roads[road], points))
         r.fill_surface()
-        house_sprites.add(r)
+        road_sprites.add(r)
 
     return house_sprites, area_sprites, road_sprites
 

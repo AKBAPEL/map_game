@@ -1,4 +1,6 @@
 import pygame
+BLACK = (0, 0, 0)
+
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self,data,points):
@@ -8,6 +10,7 @@ class Ground(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
         x,y = self.get_dimension(self.screen_coord)
         self.image = pygame.Surface((x,y))
+        self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
         self.image.fill((0,0,0))
 
