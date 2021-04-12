@@ -4,9 +4,9 @@ class Ground(pygame.sprite.Sprite):
     def __init__(self,data,points):
         super().__init__()
         self.color = data.color
-        screen_coord = self.convert_coord(data,points)
+        self.screen_coord = self.convert_coord(data,points)
         pygame.sprite.Sprite.__init__(self)
-        x,y = self.get_dimension(screen_coord)
+        x,y = self.get_dimension(self.screen_coord)
         self.image = pygame.Surface((x,y))
         self.rect = self.image.get_rect()
         self.image.fill((0,0,0))
@@ -25,7 +25,7 @@ class Ground(pygame.sprite.Sprite):
 
 class Polygon(Ground):
     def fill_surface(self):
-        pygame.draw.polygon(self.screen, self.color, self.screen_coord, 0)
+        pygame.draw.polygon(self.image, self.color, self.screen_coord, 0)
 
 class Road(Ground):
     def __init__(self, data, points):
@@ -33,4 +33,4 @@ class Road(Ground):
         self.width = data.width
 
     def fill_surface(self):
-        pygame.draw.polygon(self.screen, self.color, False, self.screen_coord, width)
+        pygame.draw.lines(self.image, self.color, False, self.screen_coord, self.width)

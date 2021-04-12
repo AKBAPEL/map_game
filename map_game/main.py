@@ -19,7 +19,9 @@ def run():
 
     house_sprites, area_sprites, road_sprites = init_sprites()
     #Цикл Игры
+    running = True
     while running:
+
         clock.tick(FPS)
         for event in pygame.event.get():
             # проверить закрытие окна
@@ -27,9 +29,9 @@ def run():
                 running = False
         # Рендеринг
         screen.fill(BLACK)
-        area_sprites.draw()
-        house_sprites.draw()
-        road_sprites.draw()
+        area_sprites.draw(screen)
+        house_sprites.draw(screen)
+        road_sprites.draw(screen)
 
         # после отрисовки всего, переворачиваем экран
         pygame.display.flip()
@@ -47,15 +49,15 @@ def init_sprites():
     area_sprites = pygame.sprite.Group()
     road_sprites = pygame.sprite.Group()
     for house in houses:
-        p = (Polygon(house, points))
+        p = (Polygon(houses[house], points))
         p.fill_surface()
         house_sprites.add(p)
     for area in areas:
-        p = (Polygon(area, points))
+        p = (Polygon(areas[area], points))
         p.fill_surface()
         house_sprites.add(p)
     for road in roads:
-        r = (Road(road, points))
+        r = (Road(roads[road], points))
         r.fill_surface()
         house_sprites.add(r)
 
