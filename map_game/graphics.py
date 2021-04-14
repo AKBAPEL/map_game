@@ -8,11 +8,17 @@ class Ground(pygame.sprite.Sprite):
         self.color = data.color
         self.screen_coord = self.convert_coord(data,points)
         pygame.sprite.Sprite.__init__(self)
-        x,y = self.get_dimension(self.screen_coord)
-        self.image = pygame.Surface((x,y))
+        dimension,min_coord = self.get_dimension(self.screen_coord)
+        self.image = pygame.Surface(dimension)
         self.image.set_colorkey(BLACK)
         self.rect = self.image.get_rect()
-        self.image.fill((0,0,0))
+        self.rect.centerx = dimension[0]//2 + min_coord[0]
+        self.rect.centery = dimension[1] // 2 + min_coord[1]
+        self.shift_coordinates(*min_coord)
+
+    def shift_coordinates(self,x_min,y_min):
+        self.screen_coord = [(x-x_min, y - y_min)
+                             for (x,y) in self.screen_coord]
 
     def convert_coord(self,data,points):
         points_ = [points[p] for p in data.points]
@@ -24,7 +30,7 @@ class Ground(pygame.sprite.Sprite):
         y = [c[1] for c in coords]
         diff_x = abs(max(x) - min(x))
         diff_y = abs(max(y) - min(y))
-        return diff_x, diff_y
+        return (diff_x, diff_y),(min(x),min(y))
 
 class Polygon(Ground):
     def fill_surface(self):
