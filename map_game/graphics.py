@@ -43,3 +43,22 @@ class Road(Ground):
 
     def fill_surface(self):
         pygame.draw.lines(self.image, self.color, False, self.screen_coord, self.width)
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.color = (255,255,255)
+        self.image = pygame.Surface((20,20))
+        self.image.fill(self.color)
+        self.rect = self.image.get_rect()
+        self.x = 0
+        self.y = 0
+
+    def update(self):
+        self.rect.centery += self.y
+
+    def move(self,keys):
+        self.x = 0
+        self.y = 0
+        if keys['down']:
+            self.y = 3
