@@ -3,7 +3,7 @@
 """
 import pygame
 import map_game.database
-from map_game.graphics import Polygon, Road, Player
+from map_game.graphics import Polygon, Road, Player, House
 def run():
     WIDTH = 800  # ширина игрового окна
     HEIGHT = 600 # высота игрового окна
@@ -15,6 +15,8 @@ def run():
     clock = pygame.time.Clock()
     house_sprites, area_sprites, road_sprites = init_sprites()
     player = Player()
+    player_group = pygame.sprite.Group()
+    player_group.add(player)
     # Цикл игры
     cursor_keys = [pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT]
     keys = {key: False for key in cursor_keys}
@@ -32,18 +34,22 @@ def run():
             elif event.type == pygame.KEYUP:
                 if event.key in cursor_keys:
                     keys[event.key] = False
-
-
         player.move(keys)
+        intersection = pygame.sprite.spritecollideany(player,house_sprites,collided=pygame.sprite.collide_mask)
+        if intersection:
+            player.unmove(keys)
+
+
 
         # Рендеринг
         screen.fill((100, 100, 100))
         area_sprites.draw(screen)
         house_sprites.draw(screen)
         road_sprites.draw(screen)
+        player_group.draw(screen)
 
 
-        screen.blit(player.image, player.rect.center)
+
         # после отрисовки всего, переворачиваем экран
         pygame.display.flip()
 
@@ -58,7 +64,7 @@ def init_sprites():
     area_sprites = pygame.sprite.Group()
     road_sprites = pygame.sprite.Group()
     for house in houses:
-        p = Polygon(houses[house], points)
+        p = House(houses[house], points)
         p.fill_surface()
         house_sprites.add(p)
     for area in areas:

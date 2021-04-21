@@ -34,12 +34,24 @@ class Ground(pygame.sprite.Sprite):
 class Polygon(Ground):
     def fill_surface(self):
         pygame.draw.polygon(self.image, self.color, self.screen_coord, 0)
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask.outline()
+
+
 class Road(Ground):
     def __init__(self, data, points):
         super().__init__(data, points)
         self.width = data.width
     def fill_surface(self):
         pygame.draw.lines(self.image, self.color, False, self.screen_coord, self.width)
+
+class House(Polygon):
+    def fill_surface(self):
+        pygame.draw.polygon(self.image, self.color, self.screen_coord, 0)
+        self.mask = pygame.mask.from_surface(self.image)
+        self.mask.outline()
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -48,13 +60,22 @@ class Player(pygame.sprite.Sprite):
         self.image.fill(self.color)
         self.rect = self.image.get_rect()
         self.speed = 3
+        self.mask = pygame.mask.from_surface(self.image)
+        self.move_map = {pygame.K_DOWN: 1, pygame.K_UP: -1, pygame.K_LEFT: -1, pygame.K_RIGHT: 1}
+        self.unmove_map = {pygame.K_DOWN: -1, pygame.K_UP: 1, pygame.K_LEFT: 1, pygame.K_RIGHT: -1}
 
     def move(self, keys):
+        self._move(keys,self.move_map)
+
+    def unmove(self, keys):
+        self._move(keys,self.unmove_map)
+
+    def _move(self, keys,m_map):
         if keys[pygame.K_DOWN]:
-            self.rect.centery += self.speed
+            self.rect.y += self.speed * m_map[pygame.K_DOWN]
         if keys[pygame.K_UP]:
-            self.rect.centery -= self.speed
+            self.rect.y += self.speed * m_map[pygame.K_UP]
         if keys[pygame.K_LEFT]:
-            self.rect.centerx -= self.speed
+            self.rect.x += self.speed * m_map[pygame.K_LEFT]
         if keys[pygame.K_RIGHT]:
-            self.rect.centerx += self.speed
+            self.rect.x += self.speed * m_map[pygame.K_RIGHT]
