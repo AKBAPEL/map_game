@@ -47,19 +47,14 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface((20, 20))
         self.image.fill(self.color)
         self.rect = self.image.get_rect()
-        self.keys = {'up': False, 'down': False, 'left': False, 'right': False}
+        self.speed = 3
 
-    def move(self, keys_down, keys_up):
-        for d in ['down', 'up', 'left', 'right']:
-            if keys_down[d]:
-                self.keys[d] = True
-            if keys_up[d]:
-                self.keys[d] = False
-            if self.keys['down']:
-                self.rect.centery += 3
-            elif self.keys['up']:
-                self.rect.centery -= 3
-            elif self.keys['left']:
-                self.rect.centerx -= 3
-            elif self.keys['right']:
-                self.rect.centerx += 3
+    def move(self, keys):
+        if keys[pygame.K_DOWN]:
+            self.rect.centery += self.speed
+        if keys[pygame.K_UP]:
+            self.rect.centery -= self.speed
+        if keys[pygame.K_LEFT]:
+            self.rect.centerx -= self.speed
+        if keys[pygame.K_RIGHT]:
+            self.rect.centerx += self.speed
