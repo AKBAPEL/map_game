@@ -1,7 +1,7 @@
 import pygame
-
+import os
 BLACK = (0, 0, 0)
-
+WHITE = (255,255,255)
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self, data, points):
@@ -79,3 +79,4 @@ class Player(pygame.sprite.Sprite):
             self.rect.x += self.speed * m_map[pygame.K_LEFT]
         if keys[pygame.K_RIGHT]:
             self.rect.x += self.speed * m_map[pygame.K_RIGHT]
+

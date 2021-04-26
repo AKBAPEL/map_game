@@ -15,6 +15,7 @@ def run():
     clock = pygame.time.Clock()
     house_sprites, area_sprites, road_sprites = init_sprites()
     player = Player()
+
     player_group = pygame.sprite.Group()
     player_group.add(player)
     # Цикл игры
@@ -34,6 +35,9 @@ def run():
             elif event.type == pygame.KEYUP:
                 if event.key in cursor_keys:
                     keys[event.key] = False
+            """elif event.type == pygame.MOUSEMOTION:
+                mouse_pos = pygame .mouse.get_pos()
+                target.rect.center = mouse_pos"""
         player.move(keys)
         intersection = pygame.sprite.spritecollideany(player,house_sprites,collided=pygame.sprite.collide_mask)
         if intersection:
