@@ -49,10 +49,11 @@ class DataBase:
         dx = max(lon) - min(lon)
         dy = max(lat) - min(lat)
         min_lon = min(lon)
-        min_lat = min(lat)
+        min_lat = max(lat)
         for point in data:
             x = int((float(point.lon) - min_lon) * K)
-            y = int((float(point.lat) - min_lat) * K)
+            y = int(abs((float(point.lat) - min_lat)) * K)
+            print(y)
             idx = int(point.id)
             self.db['Points'][idx] = Point(x,y)
 
