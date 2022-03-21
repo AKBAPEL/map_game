@@ -75,7 +75,7 @@ class DataBase:
                 key = 'Areas'
                 color = (0, 0, 255)
                 can_cross = True
-        self.db[key][idx] = Area(points, color, can_cross)
+            self.db[key][idx] = Area(points, color, can_cross)
 
     def _make_road(self,way):
         "Создать дорогу"

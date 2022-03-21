@@ -36,6 +36,7 @@ def _parse_way(way):
 
 
 def _load(filename: str):
+    filename = 'map.xml'
     if os.path.exists(filename):
         tree = ET.parse(filename)
         return tree.getroot()
@@ -43,9 +44,10 @@ def _load(filename: str):
 
 
 
-@click.command()
-@click.argument('filename')
+#@click.command()
+#@click.argument('filename')
 def load(filename: str):
+    filename = 'map.xml'
     try:
         db = map_game.database.create()
         root = _load(filename)
@@ -69,4 +71,4 @@ def parser(root) -> dict:
 
 
 if __name__ == "__main__":
-    load()
+    load('map.xml')
